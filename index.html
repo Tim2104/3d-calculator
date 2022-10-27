@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html">
+        <meta charset="utf-8">
+        <title>3d calculator</title>
+        <link rel="stylesheet" href="css/calc-style.css">
+    </head>
+    <body>
+        <section class="calc-cont">
+            <div class="calc-component">
+                <h5>Выберите материал печати</h5>
+                <ul class="calc-cmp-list" data-val="7">
+                    <li data-active="" data-val="200" data-material="abs">ABS</li>
+                    <li data-active="" data-val="80" data-material="pla">PLA</li>
+                    <li data-active="" data-val="180" data-material="flex">FLEX</li>
+                    <li data-active="" data-val="60" data-material="pet-g">PET-G</li>
+                    <li data-active="" data-val="40" data-material="hips">HIPS</li>
+                    <li data-active="" data-val="300" data-material="sbs">SBS</li>
+                    <li data-active="active" data-val="250" data-material="nylon">Nylon</li>
+                </ul>
+            </div>
+            <div class="calc-component">
+                <h5>Выберите качество печати</h5>
+                <ul class="calc-cmp-list" data-val="0.3">
+                    <li data-active="active" data-val="0.3">0.3 мм</li>
+                    <li data-active="" data-val="0.25">0.25 мм</li>
+                    <li data-active="" data-val="0.2">0.2 мм</li>
+                    <li data-active="" data-val="0.15">0.15 мм</li>
+                    <li data-active="" data-val="0.1">0.1 мм</li>
+                </ul>
+            </div>
+            <div class="calc-component">
+                <h5>Выберите примерную массу</h5>
+                <div class="calc-cmp-wrap">
+                    <div class="calc-weight-show">
+                        Ожидаемая масса модели <br>
+                        <span id="calc-weight">0</span><span> г</span>
+                    </div>
+                    <div class="calc-weight-switch">
+                        <input id="calc-weight-range" type="range" min="0" max="1000" step="1" value="1">
+                    </div>
+                </div>
+            </div>
+            <div class="calc-component">
+                <div class="calc-cmp-wrap">
+                    <div class="calc-volume">
+                        Примерный объём: <br>
+                        <span id="calc-volume">0.95</span><span> см<sup>3</sup></span>
+                    </div>
+                    <div class="calc-price-show">
+                        Предварительная цена: <br>
+                        <span id="calc-total">2.00</span>
+                        <span id="calc-total-info">1 грамм ~ от 8р</span>
+                    </div>
+                </div>
+            </div>
+            <div class="calc-component">
+                <div class="calc-cmp-wrap">
+                    <button id="calc-btn-total">Узнать стоимость</button>
+                </div>
+            </div>
+            <div class="calc-component">
+                <p class="calc-sp"><sup>*</sup>Расчеты предварительные. Точную цену уточняйте при заказе.</p>
+            </div>
+            <script src="js/calc-main.js"></script>
+            <script>
+                window.addEventListener("DOMContentLoaded", function() {
+                    
+                    var cm = new CalcMain(
+                        document,
+                        {
+                            listBtn: "calc-cmp-list",
+                            idRange: "calc-weight-range"
+                        },
+                        {
+                            weight: "calc-weight",
+                            volume: "calc-volume",
+                            total: "calc-total"
+                        }
+                    );
+                    
+                    cm.compute();
+                    cm.btnAction("calc-cmp-list", "data-active");
+                    cm.rangeAction("calc-weight-range", "value");
+                });
+            </script>
+        </section>
+    </body>    
+</html>
